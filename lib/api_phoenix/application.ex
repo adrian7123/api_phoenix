@@ -9,7 +9,8 @@ defmodule ApiPhoenix.Application do
   def start(_type, _args) do
     children = [
       # Start the Ecto repository
-      ApiPhoenix.Repo,
+      # ApiPhoenix.Repo,
+      SocketIOEmitter,
       # Start the Telemetry supervisor
       ApiPhoenixWeb.Telemetry,
       # Start the PubSub system
