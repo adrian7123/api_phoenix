@@ -10,6 +10,12 @@ import Config
 #   show_sensitive_data_on_connection_error: true,
 #   pool_size: 10
 
+config :api_phoenix, ApiPhoenix.Repo,
+  url: "mongodb://localhost:27017/teste",
+  timeout: 60_000,
+  idle_interval: 10_000,
+  queue_target: 5_000
+
 # For development, we disable any cache and enable
 # debugging and code reloading.
 #

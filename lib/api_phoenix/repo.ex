@@ -1,5 +1,5 @@
 defmodule ApiPhoenix.Repo do
-  use Ecto.Repo,
+  use Mongo.Repo,
     otp_app: :api_phoenix,
-    adapter: Ecto.Adapters.Postgres
+    topology: :mongo
 end

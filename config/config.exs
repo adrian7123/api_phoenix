@@ -10,6 +10,14 @@ import Config
 config :api_phoenix,
   ecto_repos: [ApiPhoenix.Repo]
 
+config :socketio_emitter, :redix_pool,
+  redix_config: [
+    host: "localhost",
+    port: 6379
+  ],
+  # 5 Redix processes will be available (default value: 1)
+  pool_size: 5
+
 # Configures the endpoint
 config :api_phoenix, ApiPhoenixWeb.Endpoint,
   url: [host: "localhost"],
@@ -34,6 +42,9 @@ config :logger, :console,
 
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
+
+# MongoDB
+config :mongodb_driver, log: true
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

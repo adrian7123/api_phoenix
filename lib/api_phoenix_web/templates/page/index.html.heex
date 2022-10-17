@@ -7,15 +7,48 @@
     <title>Client</title>
   </head>
   <body>
-    <button>ping</button>
+    <button onclick="ping()">Get Accounts</button>
 
     <script src="https://cdn.socket.io/3.1.3/socket.io.min.js"
       integrity="sha384-cPwlPLvBTa3sKAgddT6krw0cJat7egBga3DJepJyrLl4Q9/5WLra3rrnMcyTyOnh"
       crossorigin="anonymous"></script>
+    <!-- 
     <script>
-      const socket = io("ws://localhost:4000", {path: "/socket/websocket", reconnection: false});
+      const socket = io("ws://localhost:4000", {
+        path: "/socket/websocket", 
+        method: "ws",
+        autoConnect: true, 
+        transports: ['websocket'], 
+        multiplex: true, 
+        forceNew: true, 
+        upgrade: true, 
+        reconnection: true, 
+      });
 
-      socket.connect();
+
+      socket.on('connect', (socket) => {
+      console.log(socket)
+
+      })
+
+
+      function ping() {
+        console.log(socket)
+        socket.connect();
+        socket.emit('ping')
+      }
+    </script> -->
+    <script>
+      const socket = new WebSocket("ws://localhost:4000/socket/websocket");
+
+      socket.onmessage = (e) => {
+        let msg = e.data;
+        console.log(JSON.parse(msg))
+      }
+
+      function ping() {
+        socket.send('get_accounts')
+      }
     </script>
   </body>
 </html>

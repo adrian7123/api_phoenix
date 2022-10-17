@@ -5,18 +5,21 @@ defmodule ApiPhoenix.Application do
 
   use Application
 
+
+
   @impl true
   def start(_type, _args) do
     children = [
       # Start the Ecto repository
-      # ApiPhoenix.Repo,
-      SocketIOEmitter,
+      {Mongo, ApiPhoenix.Repo.config()},
       # Start the Telemetry supervisor
       ApiPhoenixWeb.Telemetry,
       # Start the PubSub system
       {Phoenix.PubSub, name: ApiPhoenix.PubSub},
       # Start the Endpoint (http/https)
-      ApiPhoenixWeb.Endpoint
+      ApiPhoenixWeb.Endpoint,
+
+      {SocketIOEmitter, name: :socket_emitter}
       # Start a worker by calling: ApiPhoenix.Worker.start_link(arg)
       # {ApiPhoenix.Worker, arg}
     ]
